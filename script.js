@@ -1,3 +1,8 @@
+// Particle.js Background
+particlesJS.load("particles-js", "assets/particles.json", function () {
+  console.log("Particles.js loaded!");
+});
+
 // Typing Effect for Home Section
 const typingEffect = document.querySelector(".typing-effect");
 const text = "Software Engineer | Game Developer | Full-Stack Developer";
