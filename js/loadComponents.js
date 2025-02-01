@@ -28,8 +28,8 @@ function loadComponents() {
 }
 
 function initializeScripts() {
-  // Initialize Particles.js only after hero is loaded
-  if (document.getElementById("particles-js")) {
+  // Load Particles.js only after the hero section is loaded
+  setTimeout(() => {
     particlesJS("particles-js", {
       particles: {
         number: { value: 100, density: { enable: true, value_area: 800 } },
@@ -44,9 +44,9 @@ function initializeScripts() {
         modes: { repulse: { distance: 100, duration: 0.4 } },
       },
     });
-  }
+  }, 500);
 
-  // Start Typewriter Effect
+  // Typewriter Effect
   const roles = [
     "Full Stack Developer 💻",
     "AI Enthusiast 🤖",

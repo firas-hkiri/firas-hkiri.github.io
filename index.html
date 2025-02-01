@@ -3,14 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Your Name | Full Stack Developer & AI Specialist</title>
+    <title>Firas Hkiri | Full Stack Developer & AI Specialist</title>
+
     <!-- Google Fonts -->
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap"
       rel="stylesheet"
     />
+
     <!-- Favicon (optional) -->
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
+
     <!-- Main CSS -->
     <link rel="stylesheet" href="css/style.css" />
   </head>
@@ -22,17 +25,24 @@
     <div id="skills" class="fade-in"></div>
     <div id="projects" class="fade-in"></div>
     <div id="contact" class="fade-in"></div>
+    <div id="footer" class="fade-in"></div>
+    <!-- ✅ Added missing footer -->
 
-    <!-- JavaScript to load HTML components -->
-    <script src="js/loadComponents.js"></script>
-    <!-- Main JavaScript (e.g., typewriter effect) -->
-    <script src="js/script.js"></script>
-    <!-- Font Awesome for Icons -->
+    <!-- Scripts -->
+    <!-- Load Font Awesome for icons -->
     <script
       src="https://kit.fontawesome.com/a076d05399.js"
       crossorigin="anonymous"
+      defer
     ></script>
-    <!-- Particles.js Library -->
+
+    <!-- Load Particles.js Library FIRST (so `script.js` can use it) -->
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
+    <!-- Load Components FIRST -->
+    <script src="js/loadComponents.js" defer></script>
+
+    <!-- Main JavaScript (e.g., typewriter effect, animations) -->
+    <script src="js/script.js" defer></script>
   </body>
 </html>
