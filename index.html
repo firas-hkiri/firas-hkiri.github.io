@@ -1,54 +1,407 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Three.js Test</title>
-    <style>
-      body {
-        margin: 0;
-      }
-      canvas {
-        display: block;
-      }
-    </style>
-  </head>
-  <body>
-    <!-- Include Three.js from CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r146/three.min.js"></script>
-    <script>
-      // Set up the scene, camera, and renderer
-      const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(
-        75,
-        window.innerWidth / window.innerHeight,
-        0.1,
-        1000
-      );
-      const renderer = new THREE.WebGLRenderer();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      document.body.appendChild(renderer.domElement);
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Your Name | Full Stack Developer & AI Specialist</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Favicon (optional) -->
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <!-- CSS Reset (optional) -->
+  <style>
+    /* CSS Reset */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  </style>
+  <!-- Main CSS -->
+  <style>
+    :root {
+      --primary-color: #1e1e2f;
+      --accent-color: #f39c12;
+      --text-color: #f5f5f5;
+      --background-color: #12121d;
+      --section-bg: #1a1a29;
+      --font-family: 'Montserrat', sans-serif;
+    }
 
-      // Create a cube
-      const geometry = new THREE.BoxGeometry();
-      const material = new THREE.MeshBasicMaterial({
-        color: 0x00ff00,
-        wireframe: true,
-      });
-      const cube = new THREE.Mesh(geometry, material);
-      scene.add(cube);
+    body {
+      font-family: var(--font-family);
+      background: var(--background-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      scroll-behavior: smooth;
+    }
 
-      // Position the camera
-      camera.position.z = 5;
+    a {
+      color: var(--accent-color);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    a:hover { color: #fff; }
 
-      // Animate the cube
-      function animate() {
-        requestAnimationFrame(animate);
-        cube.rotation.x += 0.01;
-        cube.rotation.y += 0.01;
-        renderer.render(scene, camera);
+    header {
+      position: fixed;
+      width: 100%;
+      background: var(--primary-color);
+      z-index: 1000;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+    }
+
+    nav ul li {
+      margin-left: 1.5rem;
+    }
+
+    /* Hero Section */
+    .hero {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: linear-gradient(135deg, #1e1e2f, #27293d);
+      padding-top: 80px; /* for fixed header */
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero p {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .typewriter {
+      font-size: 1.25rem;
+      color: var(--accent-color);
+      min-height: 2rem;
+    }
+
+    /* Section styles */
+    section {
+      padding: 4rem 0;
+      background: var(--section-bg);
+    }
+
+    section:nth-of-type(even) {
+      background: var(--background-color);
+    }
+
+    section h2 {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 2.5rem;
+      position: relative;
+    }
+
+    section h2::after {
+      content: '';
+      width: 60px;
+      height: 3px;
+      background: var(--accent-color);
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: -10px;
+    }
+
+    /* About Section */
+    .about-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .about-content img {
+      width: 100%;
+      border-radius: 8px;
+    }
+
+    /* Skills Section */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 1.5rem;
+      justify-items: center;
+    }
+
+    .skill {
+      text-align: center;
+    }
+
+    .skill i {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+      color: var(--accent-color);
+    }
+
+    /* Projects Section */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .project-card {
+      background: var(--primary-color);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: transform 0.3s;
+    }
+    .project-card:hover { transform: translateY(-5px); }
+
+    .project-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .project-card .card-content {
+      padding: 1rem;
+    }
+
+    /* Contact Section */
+    .contact-form {
+      max-width: 600px;
+      margin: auto;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border: none;
+      border-radius: 4px;
+      font-size: 1rem;
+    }
+
+    .contact-form input {
+      background: #2a2a3d;
+      color: var(--text-color);
+    }
+
+    .contact-form textarea {
+      background: #2a2a3d;
+      color: var(--text-color);
+      resize: vertical;
+      min-height: 150px;
+    }
+
+    .contact-form button {
+      background: var(--accent-color);
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 4px;
+      font-size: 1rem;
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .contact-form button:hover {
+      background: #e08e0b;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem 0;
+      background: var(--primary-color);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header / Navigation -->
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo">
+          <h3>Your Name</h3>
+        </div>
+        <ul>
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="hero" class="hero">
+    <div class="container">
+      <h1>Hello, I'm Your Name</h1>
+      <p>Full Stack Developer & AI Enthusiast</p>
+      <div class="typewriter" id="typewriter"></div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about">
+    <div class="container">
+      <h2>About Me</h2>
+      <div class="about-content">
+        <div class="about-text">
+          <p>
+            I am a passionate Full Stack Developer with expertise in AI-driven solutions. I have a strong background in IT and a knack for building scalable, modern web applications. My experience spans front-end, back-end, and everything in between.
+          </p>
+          <p>
+            I believe in using the latest technologies to create products that not only work seamlessly but also provide a delightful user experience.
+          </p>
+        </div>
+        <div class="about-image">
+          <!-- Replace with your photo -->
+          <img src="https://via.placeholder.com/400x400.png?text=Your+Photo" alt="Your Photo">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills">
+    <div class="container">
+      <h2>My Skills</h2>
+      <div class="skills-grid">
+        <!-- You can replace icons with your preferred icon library (e.g., Font Awesome) -->
+        <div class="skill">
+          <i class="fas fa-code"></i>
+          <p>Full Stack Development</p>
+        </div>
+        <div class="skill">
+          <i class="fas fa-robot"></i>
+          <p>Artificial Intelligence</p>
+        </div>
+        <div class="skill">
+          <i class="fas fa-cloud"></i>
+          <p>Cloud Computing</p>
+        </div>
+        <div class="skill">
+          <i class="fas fa-database"></i>
+          <p>Database Management</p>
+        </div>
+        <div class="skill">
+          <i class="fas fa-mobile-alt"></i>
+          <p>Responsive Design</p>
+        </div>
+        <div class="skill">
+          <i class="fas fa-lock"></i>
+          <p>Cybersecurity</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects">
+    <div class="container">
+      <h2>Projects</h2>
+      <div class="projects-grid">
+        <!-- Project Card 1 -->
+        <div class="project-card">
+          <img src="https://via.placeholder.com/600x400.png?text=Project+1" alt="Project 1">
+          <div class="card-content">
+            <h3>Project Title 1</h3>
+            <p>A brief description of your project highlighting its innovative aspects and technologies used.</p>
+            <a href="#" target="_blank">View Details</a>
+          </div>
+        </div>
+        <!-- Project Card 2 -->
+        <div class="project-card">
+          <img src="https://via.placeholder.com/600x400.png?text=Project+2" alt="Project 2">
+          <div class="card-content">
+            <h3>Project Title 2</h3>
+            <p>A brief description of your project highlighting its innovative aspects and technologies used.</p>
+            <a href="#" target="_blank">View Details</a>
+          </div>
+        </div>
+        <!-- Add more project cards as needed -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <div class="container">
+      <h2>Contact Me</h2>
+      <div class="contact-form">
+        <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+          <input type="text" name="name" placeholder="Your Name" required>
+          <input type="email" name="_replyto" placeholder="Your Email" required>
+          <textarea name="message" placeholder="Your Message" required></textarea>
+          <button type="submit">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Your Name. All rights reserved.</p>
+  </footer>
+
+  <!-- JavaScript for Typewriter Effect -->
+  <script>
+    const roles = [
+      "Full Stack Developer",
+      "AI Enthusiast",
+      "IT Specialist",
+      "Cloud Engineer"
+    ];
+
+    const typewriterElement = document.getElementById('typewriter');
+    let roleIndex = 0, charIndex = 0;
+    const typingSpeed = 150, erasingSpeed = 100, delayBetweenRoles = 2000;
+
+    function type() {
+      if (charIndex < roles[roleIndex].length) {
+        typewriterElement.textContent += roles[roleIndex].charAt(charIndex);
+        charIndex++;
+        setTimeout(type, typingSpeed);
+      } else {
+        setTimeout(erase, delayBetweenRoles);
       }
-      animate();
-    </script>
-  </body>
+    }
+
+    function erase() {
+      if (charIndex > 0) {
+        typewriterElement.textContent = roles[roleIndex].substring(0, charIndex - 1);
+        charIndex--;
+        setTimeout(erase, erasingSpeed);
+      } else {
+        roleIndex = (roleIndex + 1) % roles.length;
+        setTimeout(type, typingSpeed);
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+      if (roles.length) setTimeout(type, delayBetweenRoles);
+    });
+  </script>
+  <!-- Font Awesome for Icons -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
 </html>
