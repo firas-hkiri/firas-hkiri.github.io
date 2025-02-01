@@ -1,94 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Firas Hkiri - Portfolio</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-</head>
-<body>
-    <!-- Animated Background -->
-    <div id="particles-js"></div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Three.js Test</title>
+    <style>
+      body {
+        margin: 0;
+      }
+      canvas {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Include Three.js from CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r146/three.min.js"></script>
+    <script>
+      // Set up the scene, camera, and renderer
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(
+        75,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        1000
+      );
+      const renderer = new THREE.WebGLRenderer();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      document.body.appendChild(renderer.domElement);
 
-    <!-- Home Section -->
-    <section id="home">
-        <div class="home-content">
-            <h1>Hi, I'm <span class="highlight">Firas Hkiri</span></h1>
-            <p class="typing-effect">Software Engineer | Game Developer | Full-Stack Developer</p>
-            <a href="#projects" class="btn">View My Work</a>
-        </div>
-    </section>
+      // Create a cube
+      const geometry = new THREE.BoxGeometry();
+      const material = new THREE.MeshBasicMaterial({
+        color: 0x00ff00,
+        wireframe: true,
+      });
+      const cube = new THREE.Mesh(geometry, material);
+      scene.add(cube);
 
-    <!-- About Section -->
-    <section id="about">
-        <h2>About Me</h2>
-        <div class="about-content">
-            <img src="assets/profile.jpg" alt="Firas Hkiri" class="profile-img">
-            <p>
-                I'm a passionate software engineer with experience in full-stack development and game development. 
-                I love building innovative solutions and creating engaging user experiences. 
-                My expertise includes Flutter, Laravel, Unity, and more.
-            </p>
-        </div>
-    </section>
+      // Position the camera
+      camera.position.z = 5;
 
-    <!-- Experience Section -->
-    <section id="experience">
-        <h2>Experience</h2>
-        <div class="timeline">
-            <div class="card">
-                <h3>Software Engineer - TAC-TIC</h3>
-                <p>Developed mobile and web applications using Laravel, Flutter, and MySQL.</p>
-            </div>
-            <div class="card">
-                <h3>Game Developer (Internship) - Welyne</h3>
-                <p>Worked on a 3D simulation for the online shopping application "MyClothes".</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects">
-        <h2>Projects</h2>
-        <div class="project-section">
-            <h3>Mobile Apps</h3>
-            <div class="mobile-emulator">
-                <video autoplay loop muted>
-                    <source src="assets/mobile-app.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-            </div>
-        </div>
-        <div class="project-section">
-            <h3>Web Apps</h3>
-            <div class="web-frame">
-                <video autoplay loop muted>
-                    <source src="assets/web-app.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-            </div>
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills">
-        <h2>Skills</h2>
-        <div class="skills-grid">
-            <div class="skill">Flutter</div>
-            <div class="skill">Laravel</div>
-            <div class="skill">Unity</div>
-            <div class="skill">Node.js</div>
-            <div class="skill">MySQL</div>
-            <div class="skill">JavaScript</div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact">
-        <h2>Contact</h2>
-        <p>Feel free to reach out to me!</p>
-        <div class="contact-links">
-            <a href="mailto:firashkiri1@gmail.com" class="btn"><i class="fas fa-envelope"></i> Email</a>
-            <a href="https://linkedin.com/in/firas-hkiri-805898249" class="btn"><i class="fab fa-linkedin"></i> LinkedIn</a>
-            <a href="https://github.com/firas-hkiri" class="btn"><i
+      // Animate the cube
+      function animate() {
+        requestAnimationFrame(animate);
+        cube.rotation.x += 0.01;
+        cube.rotation.y += 0.01;
+        renderer.render(scene, camera);
+      }
+      animate();
+    </script>
+  </body>
+</html>

@@ -32,12 +32,13 @@ a {
     transform: translateY(-5px);
 }
 
-/* Animated Background */
-#particles-js {
+/* Interactive Background Canvas */
+#bg {
     position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, #1e3c72, #2a5298);
     z-index: -1;
 }
 
